@@ -11,9 +11,15 @@ import javafx.stage.Stage;
  * JavaFX App
  */
 public class App extends Application {
-    int ballCenterX = 500;
-    int ballCurrentSpeedX = 3;
-    int ballIncSpeed 
+    short ballCenterX = 500;
+    byte ballCurrentSpeedX = 3;
+    int ballIncSpeed
+    
+    short rectheight = 50;
+    short stickPosY = (scene height-rectheight)/2;
+    byte stickCurrentSpeed = 10;
+    byte stickDirection = 1;
+    
     @Override
     public void start(Stage stage) {
         
@@ -38,6 +44,12 @@ public class App extends Application {
         
         root.getChildren().add(circleBall);
         
+        Rectangle rectstick = new Rectangle();
+        rectStick.setWith(10);
+        rectStick.setHeight(20);
+        rectStick.setX(600);
+        rectStick.setY(240);
+        
         Timeline timeline = new Timeline(
             // 0.017 ~= 60 FPS
             new KeyFrame(Duration.seconds(0.017), new EventHandler<ActionEvent>() {
@@ -48,11 +60,19 @@ public class App extends Application {
                     if(ballCenterX == 640) {
                         ballCurrentSpeedX = -3;
                         else if(ballCenterX <= 0){
-                        
                                 }
                         ballCenterX--;
                     System.out.println("Probando animación");
                      }
+                    rectStick.setY(stickPosY);
+                    stickPosY += stickCurrentSpeed = stickDirection;
+                    if(stickPosY) <= 0) {
+                        stickDirection = 0;
+                        stickPosY = 0;
+                        else if(stickPosY >= SCENE_HEIGHT-stickHeight) {
+                         stickDirection = 0;
+                 }
+                }
             })                
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
